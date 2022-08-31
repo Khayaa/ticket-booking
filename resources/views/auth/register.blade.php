@@ -15,6 +15,27 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label class="form-label">{{ __('Surname') }}</label>
+                <input type="text" name="surname" class="form-control @error('surname') is-invalid @enderror" placeholder="{{ __('Surname') }}">
+                @error('surname')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ __('Phone number') }}</label>
+                <input type="number" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" placeholder="{{ __('Phone number') }}">
+                @error('phone_number')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ __('ID number') }}</label>
+                <input type="number" name="id_number" class="form-control @error('id_number') is-invalid @enderror" placeholder="{{ __('ID number') }}">
+                @error('id_number')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label class="form-label">{{ __('Email address') }}</label>
                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('Email Address') }}">
                 @error('email')
