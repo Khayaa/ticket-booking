@@ -52,7 +52,7 @@
 				</div>
 			</header>
 
-         	 @include('layouts.navigation')
+         	 @include('layouts.admin.navigator')
 
 			</div>
 			<div class="page-wrapper">
