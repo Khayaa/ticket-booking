@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\user\UserEvents;
+use App\Http\Controllers\user\UserTickets;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -27,12 +29,14 @@ Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::get('ticket' , [UserTickets::class , 'show'])->name('user.tickets');
+    Route::get('events' , [UserEvents::class , 'show'])->name('user.events');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 
     Route::prefix('admin')->middleware('is_admin')->name('admin.')->group(function(){
-        
+
     });
 });

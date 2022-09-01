@@ -48,10 +48,8 @@
                     <div class="row">
                         <div class="mb-3 text-center">
                             @if (auth()->user()->image)
-                            <img src="{{ url('public/images/avatars'.auth()->user()->image) }}"
+                                <img src="{{ url('/storage/image/users/avatars/' . auth()->user()->image) }}"
                                     class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
-
-
                             @else
                                 <img src="https://eu.ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}"
                                     class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
@@ -59,13 +57,17 @@
 
 
                             <h5 class="mb-2"><strong>{{ auth()->user()->name }}</strong></h5>
-                            <label class="form-label" for="customFile">Upload Profile Picture</label>
+                            <div class="mb-3">
+                                <label class="form-label" for="customFile">Upload Profile Picture</label>
 
-                            <input type="file" name="profile_image" id="profile_image"
-                                class="form-control @error('profile_image') is-invalid @enderror">
-                            @error('profile_image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                                <input type="file" name="profile_image" id="profile_image"
+                                    class="form-control @error('profile_image') is-invalid @enderror">
+                                @error('profile_image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -77,10 +79,11 @@
                                     class="form-control @error('name') is-invalid @enderror"
                                     placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}"
                                     required>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
                         </div>
                         <div class="col">
                             <div class="mb-3">
@@ -89,10 +92,11 @@
                                     class="form-control @error('surname') is-invalid @enderror"
                                     placeholder="{{ __('Surname') }}"
                                     value="{{ old('surname', auth()->user()->surname) }}" required>
+                                @error('surname')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('surname')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
                         </div>
                     </div>
 
@@ -104,10 +108,12 @@
                                     class="form-control @error('id_number') is-invalid @enderror"
                                     placeholder="{{ __('ID Number') }}"
                                     value="{{ old('id_number', auth()->user()->id_number) }}" required>
+                                @error('id_number')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('id_number')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
+
                         </div>
                         <div class="col">
                             <div class="mb-3">
@@ -116,10 +122,11 @@
                                     class="form-control @error('phone_number') is-invalid @enderror"
                                     placeholder="{{ __('Phone Number') }}"
                                     value="{{ old('phone_number', auth()->user()->phone_number) }}" required>
+                                @error('phone_number')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('phone_number')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
                         </div>
                     </div>
 
@@ -127,10 +134,11 @@
                         <label class="form-label required">{{ __('Email address') }}</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                             placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}" required>
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+
 
                     <div class="row g-3">
                         <div class="col">
@@ -139,10 +147,11 @@
                                 <input type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror"
                                     placeholder="{{ __('New password') }}">
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
                         </div>
                         <div class="col">
                             <div class="mb-3">
@@ -150,10 +159,11 @@
                                 <input type="password" name="password_confirmation"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
                                     placeholder="{{ __('New password confirmation') }}" autocomplete="new-password">
+                                @error('password_confirmation')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('password_confirmation')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+
                         </div>
                     </div>
 

@@ -30,7 +30,13 @@
 						@auth
 						<div class="nav-item dropdown">
 							<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-								<span class="avatar avatar-sm" style="background-image: url(https://eu.ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }})"></span>
+								@if (auth()->user()->image)
+                                <img src="{{ url('/storage/image/users/avatars/' . auth()->user()->image) }}"
+                                class="avatar avatar-sm" alt="Avatar" />
+                                @else
+
+
+                                @endif
 								<div class="d-none d-xl-block ps-2">
 									{{ auth()->user()->name ?? null }}
 								</div>

@@ -18,9 +18,20 @@ class ProfileController extends Controller
             auth()->user()->update(['password' => Hash::make($request->password)]);
         }
 
+        if($request->hasFile('profile_image')){
+            $avatar = $request->file('profile_image');
+            $filename = time(). '-'. '.' . $avatar->getClientOriginalExtension();
+            $avatar->storeAs('image/users/avatars',$filename,'public');
+            auth()->user()->update(['image' => $filename]);
+
+        }
+
+
+
         auth()->user()->update([
             'name' => $request->name,
             'email' => $request->email,
+            
         ]);
 
         return redirect()->back()->with('success', 'Profile updated.');
