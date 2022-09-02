@@ -45,7 +45,7 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <a href="{{ route('profile.show') }}" class="dropdown-item">{{ __('Profile') }}</a>
+                                    <a href="{{ route('admin.profile') }}" class="dropdown-item">{{ __('Profile') }}</a>
                                     <div class="dropdown-divider"></div>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf

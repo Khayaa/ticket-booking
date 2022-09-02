@@ -11,7 +11,7 @@
                     {{ config('app.name') }}
                 </div>
                 <h2 class="page-title">
-                    {{ __('My profile') }}
+                    {{ __('Edit User Information ') }}
                 </h2>
             </div>
         </div>
@@ -39,7 +39,7 @@
             </div>
         @endif
 
-        <form action="{{ route('profile.update') }}" enctype="multipart/form-data" method="POST" class="card"
+        <form action="{{ route('admin.user.update', $user->id ) }}" enctype="multipart/form-data" method="POST" class="card"
             autocomplete="off">
             @csrf
             @method('PUT')

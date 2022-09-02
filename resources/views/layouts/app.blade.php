@@ -44,6 +44,8 @@
                                         {{ auth()->user()->name ?? null }}
                                     </div>
                                 </a>
+
+
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <a href="{{ route('profile.show') }}" class="dropdown-item">{{ __('Profile') }}</a>
                                     <div class="dropdown-divider"></div>

@@ -15,10 +15,18 @@
 
         <div class="row row-deck">
             <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body">
+                      <h2>Manage Users</h2>
+                      <a href="{{ route('admin.users')}}" class="btn btn-blue">Click here</a>
+                  </div>
+                  </div>
+                </div>
+            <div class="col-md-4">
               <div class="card">
                 <div class="card-body">
                     <h2>Profile</h2>
-                    <a href="{{ route('profile.show')}}" class="btn btn-blue">Update Profile</a>
+                    <a href="{{ route('admin.profile')}}" class="btn btn-blue">Update Profile</a>
                 </div>
               </div>
             </div>
@@ -26,18 +34,21 @@
               <div class="card">
                 <div class="card-body">
                     <h2>Events</h2>
-                    <a href="{{ route('user.events')}}" class="btn btn-azure">Open Events</a>
+                    <a href="{{ route('admin.events')}}" class="btn btn-azure">Open Events</a>
                     </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                    <h2>Tickets</h2>
-                    <a href="{{ route('user.tickets')}}" class="btn btn-blue">Check your Tickets</a>
-                </div>
-                </div>
-              </div>
+
+            </div>
+            <div class="row row-deck">
+                <div class="col-md-4">
+                    <div class="card">
+                      <div class="card-body">
+                          <h2>Tickets</h2>
+                          <a href="{{ route('admin.tickets')}}" class="btn btn-blue">Click here</a>
+                      </div>
+                      </div>
+                    </div>
             </div>
           </div>
 

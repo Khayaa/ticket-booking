@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminProfileController;
 use App\Http\Controllers\admin\dasboard;
 use App\Http\Controllers\admin\eventsController;
 use App\Http\Controllers\admin\ticketController;
@@ -40,9 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 
-    Route::prefix('admin')->middleware('is_admin')->name('admin.')->group(function(){
+    Route::prefix('admin')->middleware(["is_admin"])->name('admin.')->group(function(){
         Route::get('/dashboard' , [dasboard::class , 'show'])->name('dashboard');
 
+        Route::get('/profile' , [AdminProfileController::class , 'show'])->name('profile');
         Route::get('/tickets' , [ticketController::class , 'show'])->name('tickets');
 
 
@@ -51,8 +53,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('users');
 
 
-         Route::get('/users/{id}', [EditUserController::class , 'show'])->name('user.edit');
-         Route::put('/users/{id}', [EditUserController::class , 'updateUser'])->name('user.update');
+        Route::get('/users/{id}', [EditUserController::class , 'show'])->name('user.edit');
+        Route::put('/users/{id}', [EditUserController::class , 'updateUser'])->name('user.update');
 
         Route::delete('/users/{id}' , [\App\Http\Controllers\UserController::class, 'deleteUser'])->name('delete-user');
     });
