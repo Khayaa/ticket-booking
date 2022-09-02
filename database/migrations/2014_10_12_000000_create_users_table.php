@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('id_number')->unique();
             $table->bigInteger('phone_number')->unique();
             $table->string('email')->unique();
-            $table->boolean('is-admin')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

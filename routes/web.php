@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\dasboard;
+use App\Http\Controllers\admin\eventsController;
+use App\Http\Controllers\admin\ticketController;
+use App\Http\Controllers\admin\EditUserController;
 use App\Http\Controllers\user\UserEvents;
 use App\Http\Controllers\user\UserTickets;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::view('about', 'about')->name('about');
 
-    Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+
     Route::get('ticket' , [UserTickets::class , 'show'])->name('user.tickets');
     Route::get('events' , [UserEvents::class , 'show'])->name('user.events');
 
@@ -37,6 +41,19 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('admin')->middleware('is_admin')->name('admin.')->group(function(){
+        Route::get('/dashboard' , [dasboard::class , 'show'])->name('dashboard');
 
+        Route::get('/tickets' , [ticketController::class , 'show'])->name('tickets');
+
+
+        Route::get('/events' , [eventsController::class , 'show'])->name('events');
+
+        Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('users');
+
+
+         Route::get('/users/{id}', [EditUserController::class , 'show'])->name('user.edit');
+         Route::put('/users/{id}', [EditUserController::class , 'updateUser'])->name('user.update');
+
+        Route::delete('/users/{id}' , [\App\Http\Controllers\UserController::class, 'deleteUser'])->name('delete-user');
     });
 });

@@ -20,17 +20,27 @@
             <div class="row row-deck">
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body">Short content</div>
+                    <div class="card-body">
+                        <h2>Profile</h2>
+                        <a href="{{ route('profile.show')}}" class="btn btn-blue">Update Profile</a>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body">Extra long content of card. Lorem ipsum dolor sit amet, consetetur sadipscing elitr</div>
+                    <div class="card-body">
+                        <h2>Events</h2>
+                        <a href="{{ route('user.events')}}" class="btn btn-azure">Open Events</a>
+                        </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body">Short content</div>
+                    <div class="card-body">
+                        <h2>Tickets</h2>
+                        <a href="{{ route('user.tickets')}}" class="btn btn-blue">Check your Tickets</a>
+                    </div>
+                    </div>
                   </div>
                 </div>
               </div>
