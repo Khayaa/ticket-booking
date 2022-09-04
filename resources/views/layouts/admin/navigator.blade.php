@@ -15,7 +15,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item @if(request()->routeIs('admin.users')) active @endif">
+                    <li class="nav-item @if(request()->routeIs('admin.users*')) active @endif">
                         <a class="nav-link" href="{{route('admin.users') }}" >
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -32,7 +32,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item @if(request()->routeIs('admin.events')) active @endif">
+                    <li class="nav-item @if(request()->routeIs('admin.event*')) active @endif">
                         <a class="nav-link" href="{{ route('admin.events') }}" >
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

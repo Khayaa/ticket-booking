@@ -3,7 +3,7 @@
         <div class="navbar navbar-light">
             <div class="container-xl">
                 <ul class="navbar-nav">
-
+                    @auth
                     <li class="nav-item @if(request()->routeIs('home')) active @endif">
                         <a class="nav-link" href="{{ route('home') }}" >
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -51,12 +51,13 @@
                     <li class="nav-item @if(request()->routeIs('user.tickets')) active @endif">
                         <a class="nav-link" href="{{ route('user.tickets') }}" >
                             <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ticket" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <line x1="15" y1="5" x2="15" y2="7"></line>
-                                    <line x1="15" y1="11" x2="15" y2="13"></line>
-                                    <line x1="15" y1="17" x2="15" y2="19"></line>
-                                    <path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2"></path>
+                                    <rect x="4" y="5" width="16" height="16" rx="2"></rect>
+                                    <line x1="16" y1="3" x2="16" y2="7"></line>
+                                    <line x1="8" y1="3" x2="8" y2="7"></line>
+                                    <line x1="4" y1="11" x2="20" y2="11"></line>
+                                    <rect x="8" y="15" width="2" height="2"></rect>
                                  </svg>
                             </span>
                             <span class="nav-link-title">
@@ -64,6 +65,9 @@
                             </span>
                         </a>
                     </li>
+                    
+                    @endauth
+                    
 
 
 

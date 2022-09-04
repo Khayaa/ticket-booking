@@ -12,6 +12,8 @@
 
     <!-- Custom styles for this Page-->
     @yield('custom_styles')
+    @livewireStyles
+   
 
 </head>
 
@@ -58,6 +60,30 @@
                                     </form>
                                 </div>
                             </div>
+                            @else
+                            <div class="nav-item d-none d-md-flex me-3">
+                                <div class="btn-list">
+                                  <a href="/register" class="btn" target="_blank" rel="noreferrer">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-direction-sign" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M3.32 12.774l7.906 7.905c.427 .428 1.12 .428 1.548 0l7.905 -7.905a1.095 1.095 0 0 0 0 -1.548l-7.905 -7.905a1.095 1.095 0 0 0 -1.548 0l-7.905 7.905a1.095 1.095 0 0 0 0 1.548z"></path>
+                                        <path d="M8 12h7.5"></path>
+                                        <path d="M12 8.5l3.5 3.5l-3.5 3.5"></path>
+                                     </svg>
+                                    Sign up
+                                  </a>
+                                  <a href="/login" class="btn" target="_blank" rel="noreferrer">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                                        <path d="M20 12h-13l3 -3m0 6l-3 -3"></path>
+                                     </svg>
+                                    Log in
+                                  </a>
+                                </div>
+                              </div>
                         @endauth
 
                     </div>
@@ -76,29 +102,9 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item"><a href="https://preview.tabler.io" target="_blank"
-                                        class="link-secondary" rel="noopener">Tabler Demo</a></li>
-                                <li class="list-inline-item"><a href="https://preview.tabler.io/docs/index.html"
-                                        target="_blank" class="link-secondary" rel="noopener">Tabler Doc.</a></li>
-                                <li class="list-inline-item"><a href="https://preview.tabler.io/license.html"
-                                        target="_blank" class="link-secondary" rel="noopener">Tabler License</a></li>
-                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank"
-                                        class="link-secondary" rel="noopener">Tabler Source code</a></li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/sponsors/codecalm" target="_blank"
-                                        class="link-secondary" rel="noopener">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon text-pink icon-filled icon-inline" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                                        </svg>
-                                        Sponsor
-                                    </a>
-                                </li>
+                               
+                                   
+                               
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
@@ -108,9 +114,7 @@
                                     <a href="{{ config('app.url') }}"
                                         class="link-secondary">{{ config('app.name') }}</a>
                                 </li>
-                                <li class="list-inline-item">
-                                    Version 1.0.0
-                                </li>
+                               
                             </ul>
                         </div>
                     </div>
@@ -125,6 +129,10 @@
 
     <!-- Page level custom scripts -->
     @yield('custom_scripts')
+    @livewireScripts
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <x-livewire-alert::scripts />
 
 </body>
 
