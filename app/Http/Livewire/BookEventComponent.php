@@ -72,7 +72,7 @@ class BookEventComponent extends Component
             'position' => 'center'
         ]);
 
-
+        return redirect()->to('user/ticket');
 
         //code...
 
