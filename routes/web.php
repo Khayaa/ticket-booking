@@ -31,21 +31,21 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/' , [ShowEventsController::class , 'show'])->name('guest');    
+Route::get('/' , [ShowEventsController::class , 'show'])->name('guest');
 Route::view('about', 'about')->name('about');
 
 Route::middleware('auth')->group(function () {
 
     Route::get('user/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
+
     Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
 
     Route::get('/user/ticket' , [UserTickets::class , 'show'])->name('user.tickets');
     Route::get('/user/events' , [UserEvents::class , 'show'])->name('user.events');
     Route::get('/event/book-event/{id}',BookEventComponent::class)->name('book-event');
-  
-    
 
+
+    
     Route::get('/user/profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('/user/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
@@ -68,6 +68,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/events/edit/{id}', [EditEventController::class , 'show'])->name('event.edit.show');
         Route::put('/events/edit/{id}', [EditEventController::class , 'update'])->name('event.update');
         Route::delete('/events/{id}' , [eventsController::class, 'deleteEvent'])->name('delete-event');
- 
+
     });
 });

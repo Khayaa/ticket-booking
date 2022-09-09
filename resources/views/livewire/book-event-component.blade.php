@@ -67,13 +67,13 @@
                     </div>
                 </div>
                 <br><br>
-                <a href="#" wire:click="BookEvent" class="btn btn-primary">
+                <a href="" wire:click="BookEvent" class="btn btn-primary">
                     <span wire:loading wire:target="BookEvent" class="spinner-border spinner-border-sm me-2" role="status"></span>
                     Book Event
-                    
+
                 </a>
                 <br>
-                
+
                 <br>
             </div>
         </div>

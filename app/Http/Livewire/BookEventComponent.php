@@ -15,6 +15,7 @@ class BookEventComponent extends Component
     public $number_of_tickets = 1;
     public $discount =  0;
     public $total;
+    public $price;
 
     protected $listeners = [
         'confirmed'
@@ -33,8 +34,10 @@ class BookEventComponent extends Component
             $this->total = $this->event['price'];
             $this->discount = 0;
         } else {
-            $this->discount = $this->event['price'] / 100 * 10;
-            $this->total = $this->total - $this->discount;
+
+            $this->price = $this->event['price'] * 2;
+            $this->discount = $this->price / 100 * 10;
+            $this->total = $this->price - $this->discount;
         }
     }
 
@@ -55,7 +58,7 @@ class BookEventComponent extends Component
         $ticket->phone_number = Auth::user()->phone_number;
         $ticket->id_number = Auth::user()->id_number;
         $ticket->email = Auth::user()->email;
-        // $ticket->number_of_tickets = $this->number_of_tickets;
+        $ticket->number_of_tickets = $this->number_of_tickets;
         $ticket->total = $this->total;
         $ticket->event_id = $this->event['id'];
         $ticket->status = "completed";
@@ -72,7 +75,7 @@ class BookEventComponent extends Component
 
 
         //code...
-        
+
 
 
 
