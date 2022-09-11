@@ -18,6 +18,8 @@ class Events extends Model
         'date',
         'time',
         'thumbnail',
+        'number_of_tickets',
+        'sold_tickets'
 
 
 

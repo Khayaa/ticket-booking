@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('thumbnail')->nullable();
             $table->longText('description');
+            $table->integer('number_of_tickets')->nullable();
+            $table->integer('sold_tickets')->nullable();
             $table->decimal('price')->nullable();
             $table->string('date');
             $table->string('time');
