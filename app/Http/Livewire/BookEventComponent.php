@@ -16,14 +16,13 @@ class BookEventComponent extends Component
     public $discount =  0;
     public $total;
     public $price;
-
     protected $listeners = [
         'confirmed'
     ];
 
-    public function mount($id)
+    public function mount($slug)
     {
-        $this->event =  Events::find($id);
+        $this->event =  Events::where('slug',$slug)->first();
         $this->total = $this->event['price'];
     }
 
@@ -51,8 +50,8 @@ class BookEventComponent extends Component
     {
 
         if ($this->number_of_tickets == 2 and $this->event['number_of_tickets'] - $this->event['sold_tickets'] == 1) {
-            
-            $this->alert('warning', 'Opps!! , There is only one ticket ', [
+
+            $this->alert('warning', 'Opps!! , There is only one ticket left ', [
                 'position' => 'center'
             ]);
         } else {

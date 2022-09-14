@@ -18,15 +18,19 @@ class CreateEventController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required',
+            'number_of_tickets' => ['required', 'integer'],
+            'slug' => 'required',
             'description' => 'required',
             'event_type' => 'required',
             'date' => 'required',
             'time' => 'required',
             'price' => ['nullable'],
-            'event_type' => 'required',
+            'event_status' => 'required',
             'thumbnail' => ['image', 'mimes:png,jpeg', 'nullable'],
             'date' => 'required',
         ]);
+        $slugg =  str_replace(' ','_' ,$validated['slug']);
+
 
 
 
@@ -34,10 +38,12 @@ class CreateEventController extends Controller
             'title' => $validated['title'],
             'description' => $validated['description'],
             'event_type' => $validated['event_type'],
+            'slug' => $slugg,
+            'number_of_tickets' => $validated['number_of_tickets'],
             'date' => $validated['date'],
             'time' => $validated['time'],
             'price' => $validated['price'],
-            'event_type' => $validated['event_type'],
+            'event_status' => $validated['event_status'],
             'date' => $validated['date'],
         ]);
 

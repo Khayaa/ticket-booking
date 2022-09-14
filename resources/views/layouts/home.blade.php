@@ -60,7 +60,7 @@
                         @else
                         <div class="nav-item d-none d-md-flex me-3">
                             <div class="btn-list">
-                              <a href="/register" class="btn" target="_blank" rel="noreferrer">
+                              <a href="/register" class="btn"  rel="noreferrer">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-direction-sign" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -70,7 +70,7 @@
                                  </svg>
                                 Sign up
                               </a>
-                              <a href="/login" class="btn" target="_blank" rel="noreferrer">
+                              <a href="/login" class="btn"  rel="noreferrer">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -82,8 +82,8 @@
                             </div>
                           </div>
                     @endauth
-                           
-                        
+
+
 
                     </div>
                 </div>
@@ -101,9 +101,9 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                               
-                                   
-                               
+
+
+
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
@@ -113,7 +113,7 @@
                                     <a href="{{ config('app.url') }}"
                                         class="link-secondary">{{ config('app.name') }}</a>
                                 </li>
-                               
+
                             </ul>
                         </div>
                     </div>

@@ -90,7 +90,35 @@
                           </div>
 
                     </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label ">{{ __('Slug') }}</label>
+                                <input type="text" name="slug"
+                                    class="form-control @error('slug') is-invalid @enderror"
+                                    placeholder="{{ __('Slug') }}" value="{{ old('slug') }}"
+                                    >
+                                @error('slug')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
+                        </div>
+
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label ">{{ __('Number of Tickets') }}</label>
+                                <input type="number" name="number_of_tickets"
+                                    class="form-control @error('number_of_tickets') is-invalid @enderror"
+                                    placeholder="{{ __('Number of tickets') }}" value="{{ old('number_of_tickets') }}"
+                                    >
+                                @error('number_of_tickets')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="row g-3">
                         <div class="col">
                             <div class="mb-3">

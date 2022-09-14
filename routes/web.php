@@ -42,10 +42,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/ticket' , [UserTickets::class , 'show'])->name('user.tickets');
     Route::get('/user/events' , [UserEvents::class , 'show'])->name('user.events');
-    Route::get('/event/book-event/{id}',BookEventComponent::class)->name('book-event');
+    Route::get('/event/book-event/{slug}',BookEventComponent::class)->name('book-event');
 
 
-    
+
     Route::get('/user/profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('/user/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
