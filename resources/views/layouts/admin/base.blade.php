@@ -33,23 +33,23 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                                     aria-label="Open user menu">
-                                    @if (auth()->user()->image)
-                                        <img src="{{ url('/storage/image/users/avatars/' . auth()->user()->image) }}"
+                                    @if (auth()->guard('admin')->user()->avatar)
+                                        <img src="{{ url('/storage/image/users/avatars/' . auth()->guard('admin')->user()->avatar) }}"
                                             class="avatar avatar-sm" alt="Avatar" />
                                     @else
                                         <span class="avatar avatar-sm"
-                                            style="background-image: url(https://eu.ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }})"></span>
+                                            style="background-image: url(https://eu.ui-avatars.com/api/?name={{ urlencode(auth()->guard('admin')->user()->fullname) }})"></span>
                                     @endif
                                     <div class="d-none d-xl-block ps-2">
-                                        {{ auth()->user()->name ?? null }}
+                                        {{ auth()->guard('admin')->user()->fullname ?? null }}
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <a href="{{ route('admin.profile') }}" class="dropdown-item">{{ __('Profile') }}</a>
                                     <div class="dropdown-divider"></div>
-                                    <form method="POST" action="{{ route('logout') }}">
+                                    <form method="POST" action="{{ route('admin.logout') }}">
                                         @csrf
-                                        <a href="{{ route('logout') }}" class="dropdown-item"
+                                        <a href="{{ route('admin.logout') }}" class="dropdown-item"
                                             onclick="event.preventDefault(); this.closest('form').submit();">
                                             {{ __('Log Out') }}
                                         </a>

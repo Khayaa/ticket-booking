@@ -39,7 +39,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('profile.update') }}" enctype="multipart/form-data" method="POST" class="card"
+            <form action="{{ route('admin.profile.update') }}" enctype="multipart/form-data" method="POST" class="card"
                 autocomplete="off">
                 @csrf
                 @method('PUT')
@@ -47,22 +47,22 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="mb-3 text-center">
-                            @if (auth()->user()->image)
-                                <img src="{{ url('/storage/image/users/avatars/' . auth()->user()->image) }}"
+                            @if (auth()->guard('admin')->user()->avatar)
+                                <img src="{{ url('/storage/image/users/avatars/' . auth()->guard('admin')->user()->avatar) }}"
                                     class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
                             @else
-                                <img src="https://eu.ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}"
+                                <img src="https://eu.ui-avatars.com/api/?name={{ urlencode(auth()->guard('admin')->user()->fullname) }}"
                                     class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
                             @endif
 
 
-                            <h5 class="mb-2"><strong>{{ auth()->user()->name }}</strong></h5>
+                            <h5 class="mb-2"><strong>{{ auth()->guard('admin')->user()->fullname }}</strong></h5>
                             <div class="mb-3">
-                                <label class="form-label" for="customFile">Upload Profile Picture</label>
+                                <label class="form-label" for="avatar">Upload Profile Picture</label>
 
-                                <input type="file" name="profile_image" id="profile_image"
-                                    class="form-control @error('profile_image') is-invalid @enderror">
-                                @error('profile_image')
+                                <input type="file" name="avatar" id="avatar"
+                                    class="form-control @error('avatar') is-invalid @enderror">
+                                @error('avatar')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
 
@@ -74,54 +74,29 @@
                     <div class="row g-3">
                         <div class="col">
                             <div class="mb-3">
-                                <label class="form-label required">{{ __('Name') }}</label>
-                                <input type="text" name="name"
-                                    class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}"
+                                <label class="form-label required">{{ __('Full Name') }}</label>
+                                <input type="text" name="fullname"
+                                    class="form-control @error('fullname') is-invalid @enderror"
+                                    placeholder="{{ __('Full Name') }}" value="{{ old('fullname', auth()->guard('admin')->user()->fullname) }}"
                                     required>
-                                @error('name')
+                                @error('fullname')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                         </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label required">{{ __('Surname') }}</label>
-                                <input type="text" name="surname"
-                                    class="form-control @error('surname') is-invalid @enderror"
-                                    placeholder="{{ __('Surname') }}"
-                                    value="{{ old('surname', auth()->user()->surname) }}" required>
-                                @error('surname')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
 
-                        </div>
                     </div>
 
                     <div class="row g-3">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label required">{{ __('ID Number') }}</label>
-                                <input type="number" name="id_number"
-                                    class="form-control @error('id_number') is-invalid @enderror"
-                                    placeholder="{{ __('ID Number') }}"
-                                    value="{{ old('id_number', auth()->user()->id_number) }}" required>
-                                @error('id_number')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
 
-
-                        </div>
                         <div class="col">
                             <div class="mb-3">
                                 <label class="form-label required">{{ __('Phone Number') }}</label>
                                 <input type="phone_number" name="phone_number"
                                     class="form-control @error('phone_number') is-invalid @enderror"
                                     placeholder="{{ __('Phone Number') }}"
-                                    value="{{ old('phone_number', auth()->user()->phone_number) }}" required>
+                                    value="{{ old('phone_number', auth()->guard('admin')->user()->phone_number) }}" required>
                                 @error('phone_number')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -131,12 +106,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label required">{{ __('Email address') }}</label>
+                        <label class="form-label">{{ __('Email address') }}</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                            placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}" required>
-                        @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                            placeholder="{{ __('Email') }}" value="{{ old('email', auth()->guard('admin')->user()->email) }}" disabled>
+
                     </div>
 
 

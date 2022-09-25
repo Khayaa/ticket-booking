@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\admin\AdminProfileController;
+use App\Http\Controllers\Admin\auth\AdminLoginController;
+use App\Http\Controllers\Admin\auth\AdminLogoutController;
+use App\Http\Controllers\Admin\auth\AdminRegisterController;
 use App\Http\Controllers\admin\CreateEventController;
 use App\Http\Controllers\admin\dasboard;
 use App\Http\Controllers\admin\EditEventController;
@@ -50,24 +53,41 @@ Route::middleware('auth')->group(function () {
     Route::put('/user/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
 
-    Route::prefix('admin')->middleware(["is_admin"])->name('admin.')->group(function(){
-        Route::get('/dashboard' , [dasboard::class , 'show'])->name('dashboard');
 
-        Route::get('/profile' , [AdminProfileController::class , 'show'])->name('profile');
-        Route::get('/tickets' , [ticketController::class , 'show'])->name('tickets');
-
-        Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('users');
-        Route::get('/users/{id}', [EditUserController::class , 'show'])->name('user.edit');
-        Route::put('/users/{id}', [EditUserController::class , 'updateUser'])->name('user.update');
-        Route::delete('/users/{id}' , [\App\Http\Controllers\UserController::class, 'deleteUser'])->name('delete-user');
-
-
-       Route::get('/events' , [eventsController::class , 'show'])->name('events');
-        Route::get('/events/create', [CreateEventController::class , 'show'])->name('event.show');
-        Route::post('/events/create', [CreateEventController::class , 'create'])->name('event.create');
-        Route::get('/events/edit/{id}', [EditEventController::class , 'show'])->name('event.edit.show');
-        Route::put('/events/edit/{id}', [EditEventController::class , 'update'])->name('event.update');
-        Route::delete('/events/{id}' , [eventsController::class, 'deleteEvent'])->name('delete-event');
-
-    });
 });
+
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    Route::middleware('guest:admin')->group(function (){
+    Route::get('/register' , [AdminRegisterController::class , 'show'])->name('register.show');
+    Route::post('/register' , [AdminRegisterController::class , 'create'])->name('register.create');
+
+    Route::get('/login' , [AdminLoginController::class , 'show'])->name('login.show');
+    Route::post('/login' , [AdminLoginController::class , 'login'])->name('login');
+   });
+
+   Route::middleware(['is_approved' , 'auth:admin'])->group(function (){
+
+    Route::get('/dashboard' , [dasboard::class , 'show'])->name('dashboard');
+
+    Route::get('/profile' , [AdminProfileController::class , 'show'])->name('profile');
+    Route::put('/profile' , [AdminProfileController::class , 'update'])->name('profile.update');
+    Route::get('/tickets' , [ticketController::class , 'show'])->name('tickets');
+    Route::post('/logout' , [AdminLogoutController::class , 'logout'])->name('logout');
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('users');
+    Route::get('/users/{id}', [EditUserController::class , 'show'])->name('user.edit');
+    Route::put('/users/{id}', [EditUserController::class , 'updateUser'])->name('user.update');
+    Route::delete('/users/{id}' , [\App\Http\Controllers\UserController::class, 'deleteUser'])->name('delete-user');
+
+
+   Route::get('/events' , [eventsController::class , 'show'])->name('events');
+    Route::get('/events/create', [CreateEventController::class , 'show'])->name('event.show');
+    Route::post('/events/create', [CreateEventController::class , 'create'])->name('event.create');
+    Route::get('/events/edit/{id}', [EditEventController::class , 'show'])->name('event.edit.show');
+    Route::put('/events/edit/{id}', [EditEventController::class , 'update'])->name('event.update');
+    Route::delete('/events/{id}' , [eventsController::class, 'deleteEvent'])->name('delete-event');
+   });
+
+});
+
+
