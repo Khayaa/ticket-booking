@@ -10,6 +10,6 @@ class ViewTicket extends Controller
     //
     public function show(){
 
-        return view();
+        return view('users.user-viewticket');
     }
 }

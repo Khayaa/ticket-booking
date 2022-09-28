@@ -15,6 +15,7 @@ use App\Http\Controllers\EventDetails;
 use App\Http\Controllers\user\UserEvents;
 use App\Http\Controllers\user\UserTickets;
 use App\Http\Controllers\ShowAllEventsController;
+use App\Http\Controllers\User\ViewTicket;
 use App\Http\Livewire\BookEventComponent;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/events' , [UserEvents::class , 'show'])->name('user.events');
     Route::get('/event/book-event/{slug}',BookEventComponent::class)->name('book-event');
 
-
+    Route::get('/user/ticket/download', [ViewTicket::class , 'show'])->name('ticket.download');
 
     Route::get('/user/profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('/user/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
