@@ -11,7 +11,7 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-           
+
 
                 @foreach ($events as $event)
                 <div class="card d-flex flex-column">
@@ -27,13 +27,13 @@
                         @else
                         <span class="badge bg-green">FREE</span>
                         @endif
-                        
+
                         <div class="ms-3">
                           <a href="#" class="text-body">DATE :{{ $event->date}}</a>
                           <div class="text-muted">TIME :{{ $event->time }}</div>
                         </div>
                         <div class="ms-auto">
-                            <a href="{{ route('book-event', $event->id) }}" class="btn btn-primary">
+                            <a href="{{ route('book-event', $event->slug) }}" class="btn btn-primary">
                                 Book Event
                               </a>
                         </div>
@@ -42,7 +42,7 @@
                   </div>
                   <br>
                 @endforeach
-           
+
         </div>
     </div>
 @endsection

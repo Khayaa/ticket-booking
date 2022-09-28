@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\eventsController;
 use App\Http\Controllers\admin\ticketController;
 use App\Http\Controllers\admin\EditUserController;
 use App\Http\Controllers\admin\ShowEventsController;
+use App\Http\Controllers\EventDetails;
 use App\Http\Controllers\user\UserEvents;
 use App\Http\Controllers\user\UserTickets;
 use App\Http\Controllers\ShowAllEventsController;
@@ -36,6 +37,7 @@ Auth::routes();
 
 Route::get('/' , [ShowEventsController::class , 'show'])->name('guest');
 Route::view('about', 'about')->name('about');
+Route::get('/event-details/{id}', [EventDetails::class , 'show'])->name('event-details');
 
 Route::middleware('auth')->group(function () {
 
