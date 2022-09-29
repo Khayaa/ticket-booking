@@ -41,7 +41,6 @@ Route::get('/event-details/{id}', [EventDetails::class , 'show'])->name('event-d
 Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('user/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
 
