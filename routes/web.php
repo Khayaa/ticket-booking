@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/' , [ShowAllEventsController::class , 'show'])->name('guest');
-Route::view('about', 'about')->name('about');
+// Route::view('about', 'about')->name('about');
 Route::get('/event-details/{id}', [EventDetails::class , 'show'])->name('event-details');
 Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
 
