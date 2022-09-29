@@ -10,7 +10,6 @@ use App\Http\Controllers\admin\EditEventController;
 use App\Http\Controllers\admin\eventsController;
 use App\Http\Controllers\admin\ticketController;
 use App\Http\Controllers\admin\EditUserController;
-use App\Http\Controllers\admin\ShowEventsController;
 use App\Http\Controllers\EventDetails;
 use App\Http\Controllers\user\UserEvents;
 use App\Http\Controllers\user\UserTickets;
@@ -36,15 +35,16 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/' , [ShowEventsController::class , 'show'])->name('guest');
+Route::get('/' , [ShowAllEventsController::class , 'show'])->name('guest');
 Route::view('about', 'about')->name('about');
 Route::get('/event-details/{id}', [EventDetails::class , 'show'])->name('event-details');
+Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
 
 Route::middleware('auth')->group(function () {
 
     Route::get('user/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
+    // Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
 
     Route::get('/user/ticket' , [UserTickets::class , 'show'])->name('user.tickets');
     Route::get('/user/events' , [UserEvents::class , 'show'])->name('user.events');
