@@ -70,9 +70,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
    });
 
    Route::middleware(['is_approved' , 'auth:admin'])->group(function (){
-
     Route::get('/dashboard' , [dasboard::class , 'show'])->name('dashboard');
-
     Route::get('/profile' , [AdminProfileController::class , 'show'])->name('profile');
     Route::put('/profile' , [AdminProfileController::class , 'update'])->name('profile.update');
     Route::get('/tickets' , [ticketController::class , 'show'])->name('tickets');
