@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-       @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
 
     <!-- Custom styles for this Page-->
     @yield('custom_styles')
@@ -119,7 +119,7 @@
     </div>
 
     <!-- Core plugin JavaScript-->
-    @vite('resources/js/app.js')
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
     <!-- Page level custom scripts -->
     @yield('custom_scripts')

@@ -8,11 +8,12 @@
     <meta name="description" content="">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-       @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
     <!-- Custom styles for this Page-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
     @yield('custom_styles')
-
+   
 </head>
 
 <body class="theme-light">
@@ -123,10 +124,10 @@
     </div>
     </div>
 
-    <!-- Core plugin JavaScript-->
-    @vite('resources/js/app.js')
+
 
     <!-- Page level custom scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
     @yield('custom_scripts')
 
 </body>
