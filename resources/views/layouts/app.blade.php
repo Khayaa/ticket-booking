@@ -8,12 +8,12 @@
     <meta name="description" content="">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @vite('resources/sass/app.scss')
+       @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Custom styles for this Page-->
     @yield('custom_styles')
     @livewireStyles
-   
+
 
 </head>
 
@@ -102,9 +102,9 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                               
-                                   
-                               
+
+
+
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
@@ -114,7 +114,7 @@
                                     <a href="{{ config('app.url') }}"
                                         class="link-secondary">{{ config('app.name') }}</a>
                                 </li>
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
     @yield('custom_scripts')
     @livewireScripts
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+
   <x-livewire-alert::scripts />
 
 </body>
