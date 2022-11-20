@@ -41,6 +41,11 @@
                 </div>
             </div>
             <div class="hr-text"></div>
+            <div class="text-center">
+                <a href="{{ route('book-event' , ['slug'=> $event->slug])}}" class="btn btn-primary">
+                   Book Event
+                  </a>
+            </div>
         </div>
     </div>
 @endsection
