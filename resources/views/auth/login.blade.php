@@ -9,7 +9,7 @@
 
             <div class="mb-3">
                 <label class="form-label">{{ __('Email address') }}</label>
-                <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('Enter email') }}" required autofocus tabindex="1">
+                <input type="email" name="email" value="user@gmail.com" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('Enter email') }}" required autofocus tabindex="1">
                 @error('email')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -24,7 +24,7 @@
                     </span>
                     @endif
                 </label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" required tabindex="2">
+                <input type="password" name="password" value="user1000" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" required tabindex="2">
                 @error('password')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -39,6 +39,12 @@
 
             <div class="form-footer">
                 <button type="submit" class="btn btn-primary w-100" tabindex="4">{{ __('Sign in') }}</button>
+            </div>
+
+            <div>
+                <div class="text-center text-muted mt-3">
+                     <a href="{{ route('admin.login') }}" tabindex="-1">{{ __(' Log in as Admin') }}</a>
+                </div>
             </div>
         </div>
     </form>

@@ -21,7 +21,7 @@
 
             <div class="mb-3">
                 <label class="form-label">{{ __('Email address') }}</label>
-                <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('Enter email') }}" required autofocus tabindex="1">
+                <input type="email" name="email" value="admin@gmail.com" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('Enter email') }}" required autofocus tabindex="1">
                 @error('email')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -36,7 +36,7 @@
                     </span>
                     @endif
                 </label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" required tabindex="2">
+                <input type="password" value="admin2000" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" required tabindex="2">
                 @error('password')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -48,6 +48,7 @@
                     <span class="form-check-label">{{ __('Remember me on this device') }}</span>
                 </label>
             </div>
+            
 
             <div class="form-footer">
                 <button type="submit" class="btn btn-primary w-100" tabindex="4">{{ __('Sign in') }}</button>
