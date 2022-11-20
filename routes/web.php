@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\auth\AdminLoginController;
 use App\Http\Controllers\Admin\auth\AdminLogoutController;
+use App\Http\Controllers\Admin\dasboard;
 use App\Http\Controllers\Admin\auth\AdminRegisterController;
-use App\Http\Controllers\admin\CreateEventController;
-use App\Http\Controllers\admin\dasboard;
-use App\Http\Controllers\admin\EditEventController;
-use App\Http\Controllers\admin\eventsController;
-use App\Http\Controllers\admin\ticketController;
-use App\Http\Controllers\admin\EditUserController;
+use App\Http\Controllers\Admin\CreateEventController;
+use App\Http\Controllers\Admin\EditEventController;
+use App\Http\Controllers\Admin\eventsController;
+use App\Http\Controllers\Admin\ticketController;
+use App\Http\Controllers\Admin\EditUserController;
 use App\Http\Controllers\EventDetails;
 use App\Http\Controllers\user\UserEvents;
 use App\Http\Controllers\user\UserTickets;
