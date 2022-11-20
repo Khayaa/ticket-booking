@@ -14,6 +14,6 @@ class ticketController extends Controller
     }
     public function show(){
 
-        return view('admin.dashboard');
+        return view('admin.Dashboard');
     }
 }
