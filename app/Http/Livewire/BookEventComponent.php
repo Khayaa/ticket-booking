@@ -76,8 +76,10 @@ class BookEventComponent extends Component
             array(
                 'amount' => $this->total,
                 'currency' => env('PAYPAL_CURRENCY'),
+                'returnUrl'=>url('success'),
+                'cancelUrl'=>url('error')
 
-            ));
+            ))->send();
 
             if ($response->isRedirect()) {
                 // redirect to offsite payment gateway
