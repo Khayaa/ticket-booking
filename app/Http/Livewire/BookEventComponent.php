@@ -7,7 +7,7 @@ use App\Models\Tickets;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Auth;
-
+use Omnipay\Omnipay;
 class BookEventComponent extends Component
 {
     use LivewireAlert;
@@ -20,6 +20,16 @@ class BookEventComponent extends Component
         'confirmed'
     ];
 
+    private $gateway;
+
+
+    public function __construct()
+    {
+        $this->gateway = Omnipay::create('PayPal_Rest');
+        $this->gateway->setClientId(env('PAYPAL_CLIENT_ID'));
+        $this->gateway->setSecret(env('PAYPAL_SECRET_KEY'));
+        $this->gateway->setTestMode(true);
+    }
     public function mount($slug)
     {
         $this->event =  Events::where('slug',$slug)->first();
@@ -51,35 +61,73 @@ class BookEventComponent extends Component
 
         if ($this->number_of_tickets == 2 and $this->event['number_of_tickets'] - $this->event['sold_tickets'] == 1) {
 
+            // $this->alert('warning', 'Opps!! , There is only one ticket left ', [
+            //     'position' => 'center'
+            // ]);
             $this->alert('warning', 'Opps!! , There is only one ticket left ', [
-                'position' => 'center'
-            ]);
-        } else {
-            $ticket = new  Tickets();
-            $ticket->user_id = Auth::user()->id;
-            $ticket->name = Auth::user()->name;
-            $ticket->surname = Auth::user()->surname;
-            $ticket->phone_number = Auth::user()->phone_number;
-            $ticket->id_number = Auth::user()->id_number;
-            $ticket->email = Auth::user()->email;
-            $ticket->number_of_tickets = $this->number_of_tickets;
-            $ticket->total = $this->total;
-            $ticket->event_id = $this->event['id'];
-            $ticket->status = "completed";
-            $ticket->save();
-            $this->event->update([
-                'sold_tickets' => $this->event['sold_tickets'] + $this->number_of_tickets,
-            ]);
-            $this->alert('success', 'Event Successfully Booked', [
-                'showConfirmButton' => true,
-                'confirmButtonText' => 'Check your Ticket',
-                'onConfirmed' => 'confirmed',
-                'allowOutsideClick' => false,
-                'timer' => null,
+                'toast' => true ,
                 'position' => 'center'
             ]);
 
-            return redirect()->to('user/ticket');
+        } else {
+
+          try {
+           $response = $this->gateway->purchase(
+            array(
+                'amount' => $this->total,
+                'currency' => env('PAYPAL_CURRENCY'),
+
+            ));
+
+            if ($response->isRedirect()) {
+                // redirect to offsite payment gateway
+                $response->redirect();
+            } elseif ($response->isSuccessful()) {
+                // payment was successful: update database
+                print_r($response);
+            } else {
+                // payment failed: display message to customer
+                echo $response->getMessage();
+            }
+
+          } catch (\Throwable $th) {
+            //throw $th;
+           return dd($th->getMessage());
+          }
+
+            // $ticket = new  Tickets();
+            // $ticket->user_id = Auth::user()->id;
+            // $ticket->name = Auth::user()->name;
+            // $ticket->surname = Auth::user()->surname;
+            // $ticket->phone_number = Auth::user()->phone_number;
+            // $ticket->id_number = Auth::user()->id_number;
+            // $ticket->email = Auth::user()->email;
+            // $ticket->number_of_tickets = $this->number_of_tickets;
+            // $ticket->total = $this->total;
+            // $ticket->event_id = $this->event['id'];
+            // $ticket->status = "completed";
+            // $ticket->save();
+            // $this->event->update([
+            //     'sold_tickets' => $this->event['sold_tickets'] + $this->number_of_tickets,
+            // ]);
+
+
+
+            // $this->alert('success', 'Event Successfully Booked', [
+            //     'showConfirmButton' => true,
+            //     'confirmButtonText' => 'Check your Ticket',
+            //     'onConfirmed' => 'confirmed',
+            //     'allowOutsideClick' => false,
+            //     'timer' => null,
+            //     'position' => 'center'
+            // ]);
+            // $this->alert('success', 'You have succesfully Booked the Event');
+            // $this->alert('success', 'You have successfully Booked the Event' ,  [
+            //     'position' => 'center',
+            //     'showConfirmButton' => true,
+            //     'toast' => true
+            // ]);
+            // return redirect('user/ticket');
         }
 
 

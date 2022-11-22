@@ -67,11 +67,21 @@
                     </div>
                 </div>
                 <br><br>
-                <a href="" wire:click="BookEvent" class="btn btn-primary">
+                @if ($event->number_of_tickets == $event->sold_tickets)
+                <div class="text-center">
+                    <h2>
+                        <span class="badge bg-red">Event has been sold Out</span>
+                    </h2>
+
+                </div>
+                @else
+                <a href="#" wire:click="BookEvent" class="btn btn-primary">
                     <span wire:loading wire:target="BookEvent" class="spinner-border spinner-border-sm me-2" role="status"></span>
                     Book Event
 
                 </a>
+                @endif
+
                 <br>
 
                 <br>
