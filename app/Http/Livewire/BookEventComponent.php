@@ -83,18 +83,18 @@ class BookEventComponent extends Component
 
             if ($response->isRedirect()) {
                 // redirect to offsite payment gateway
-                $response->redirect();
+               $response->redirect();
             } elseif ($response->isSuccessful()) {
                 // payment was successful: update database
                 print_r($response);
             } else {
                 // payment failed: display message to customer
-                echo $response->getMessage();
+                ($response->getMessage());
             }
 
           } catch (\Throwable $th) {
             //throw $th;
-           return dd($th->getMessage());
+           return ($th->getMessage());
           }
 
             // $ticket = new  Tickets();
