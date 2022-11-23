@@ -39,6 +39,8 @@ Route::get('/' , [ShowAllEventsController::class , 'show'])->name('guest');
 Route::view('about', 'about')->name('about');
 Route::get('/event-details/{id}', [EventDetails::class , 'show'])->name('event-details');
 Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
+Route::view( 'payment/success','users.payment-success')->name('pay-success');
+Route::view( 'payment/error','users.payment-error')->name('pay-error');
 
 Route::middleware('auth')->group(function () {
     Route::get('user/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

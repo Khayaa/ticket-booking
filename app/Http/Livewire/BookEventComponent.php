@@ -73,13 +73,13 @@ class BookEventComponent extends Component
         } else {
 
             try {
-                $amount = $this->total *  0.058;
+                $amount = $this->total * 0.058;
                 $response = $this->gateway->purchase(
                     array(
-                        'amount' =>$amount,
+                        'amount' => $amount,
                         'currency' => env('PAYPAL_CURRENCY'),
-                        'returnUrl' => url('success'),
-                        'cancelUrl' => url('error')
+                        'returnUrl' => url('payment/success'),
+                        'cancelUrl' => url('payment/error')
 
                     )
                 )->send();
@@ -89,34 +89,37 @@ class BookEventComponent extends Component
                     return redirect($url);
                 } elseif ($response->isSuccessful()) {
                     // payment was successful: update database
-                    print_r($response);
+                    $ticket = new Tickets();
+                    $ticket->user_id = Auth::user()->id;
+                    $ticket->name = Auth::user()->name;
+                    $ticket->surname = Auth::user()->surname;
+                    $ticket->phone_number = Auth::user()->phone_number;
+                    $ticket->id_number = Auth::user()->id_number;
+                    $ticket->email = Auth::user()->email;
+                    $ticket->number_of_tickets = $this->number_of_tickets;
+                    $ticket->total = $this->total;
+                    $ticket->event_id = $this->event['id'];
+                    $ticket->status = "completed";
+                    $ticket->save();
+                    $this->event->update([
+                        'sold_tickets' => $this->event['sold_tickets'] + $this->number_of_tickets,
+                    ]);
                 } else {
                     // payment failed: display message to customer
-                    ($response->getMessage());
+
+                    $this->alert('error', $response->getMessage(), [
+                        'toast' => true,
+                        'position' => 'center'
+                    ]);
                 }
 
             } catch (\Throwable $th) {
                 //throw $th;
-                return ($th->getMessage());
+                return  $this->alert('error', $th->getMessage(), [
+                    'toast' => true,
+                    'position' => 'center'
+                ]);
             }
-
-            // $ticket = new  Tickets();
-            // $ticket->user_id = Auth::user()->id;
-            // $ticket->name = Auth::user()->name;
-            // $ticket->surname = Auth::user()->surname;
-            // $ticket->phone_number = Auth::user()->phone_number;
-            // $ticket->id_number = Auth::user()->id_number;
-            // $ticket->email = Auth::user()->email;
-            // $ticket->number_of_tickets = $this->number_of_tickets;
-            // $ticket->total = $this->total;
-            // $ticket->event_id = $this->event['id'];
-            // $ticket->status = "completed";
-            // $ticket->save();
-            // $this->event->update([
-            //     'sold_tickets' => $this->event['sold_tickets'] + $this->number_of_tickets,
-            // ]);
-
-
 
             // $this->alert('success', 'Event Successfully Booked', [
             //     'showConfirmButton' => true,
@@ -136,7 +139,7 @@ class BookEventComponent extends Component
         }
 
 
-        //code...
+
 
 
 
