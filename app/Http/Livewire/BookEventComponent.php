@@ -8,12 +8,13 @@ use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Auth;
 use Omnipay\Omnipay;
+
 class BookEventComponent extends Component
 {
     use LivewireAlert;
-    public Events  $event;
+    public Events $event;
     public $number_of_tickets = 1;
-    public $discount =  0;
+    public $discount = 0;
     public $total;
     public $price;
     protected $listeners = [
@@ -32,7 +33,7 @@ class BookEventComponent extends Component
     }
     public function mount($slug)
     {
-        $this->event =  Events::where('slug',$slug)->first();
+        $this->event = Events::where('slug', $slug)->first();
         $this->total = $this->event['price'];
     }
 
@@ -65,37 +66,39 @@ class BookEventComponent extends Component
             //     'position' => 'center'
             // ]);
             $this->alert('warning', 'Opps!! , There is only one ticket left ', [
-                'toast' => true ,
+                'toast' => true,
                 'position' => 'center'
             ]);
 
         } else {
 
-          try {
-           $response = $this->gateway->purchase(
-            array(
-                'amount' => $this->total,
-                'currency' => env('PAYPAL_CURRENCY'),
-                'returnUrl'=>url('success'),
-                'cancelUrl'=>url('error')
+            try {
+                $amount = $this->total *  0.058;
+                $response = $this->gateway->purchase(
+                    array(
+                        'amount' =>$amount,
+                        'currency' => env('PAYPAL_CURRENCY'),
+                        'returnUrl' => url('success'),
+                        'cancelUrl' => url('error')
 
-            ))->send();
+                    )
+                )->send();
 
-            if ($response->isRedirect()) {
-                // redirect to offsite payment gateway
-               $response->redirect();
-            } elseif ($response->isSuccessful()) {
-                // payment was successful: update database
-                print_r($response);
-            } else {
-                // payment failed: display message to customer
-                ($response->getMessage());
+                if ($response->isRedirect()) {
+                    $url = $response->getRedirectUrl();
+                    return redirect($url);
+                } elseif ($response->isSuccessful()) {
+                    // payment was successful: update database
+                    print_r($response);
+                } else {
+                    // payment failed: display message to customer
+                    ($response->getMessage());
+                }
+
+            } catch (\Throwable $th) {
+                //throw $th;
+                return ($th->getMessage());
             }
-
-          } catch (\Throwable $th) {
-            //throw $th;
-           return ($th->getMessage());
-          }
 
             // $ticket = new  Tickets();
             // $ticket->user_id = Auth::user()->id;
@@ -146,6 +149,7 @@ class BookEventComponent extends Component
     public function render()
     {
 
-        return view('livewire.book-event-component', ['event' => $this->event])->extends('layouts.app')->section('content');;
+        return view('livewire.book-event-component', ['event' => $this->event])->extends('layouts.app')->section('content');
+        ;
     }
 }
