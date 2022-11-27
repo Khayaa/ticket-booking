@@ -3,8 +3,8 @@
     <div class="page page-center">
       <div class="container-tight py-4">
         <div class="empty">
-          <div class="empty-header">Thank You</div>
-          <p class="empty-title">Your Payment was successful</p>
+          {{-- <div class="empty-header">Thank You</div> --}}
+          <p class="empty-title">{{ $message }}</p>
           {{-- <p class="empty-subtitle text-muted">
             We are sorry but our server encountered an internal error
           </p> --}}

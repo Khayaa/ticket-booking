@@ -73,13 +73,21 @@ class BookEventComponent extends Component
         } else {
 
             try {
-                $amount = $this->total * 0.058;
+                if(is_null($this->total)){
+                    $amount = 20;
+                }else{
+                    $amount = 10;
+                }
+
                 $response = $this->gateway->purchase(
                     array(
                         'amount' => $amount,
                         'currency' => env('PAYPAL_CURRENCY'),
-                        'returnUrl' => url('payment/success'),
-                        'cancelUrl' => url('payment/error')
+                        'returnUrl' => url('payment/success/'.$this->event['id']),
+                        'cancelUrl' => url('payment/error'),
+                        'description'=>  "hey",
+                        'transactionId'=> $this->event['id'],
+
 
                     )
                 )->send();
@@ -87,27 +95,12 @@ class BookEventComponent extends Component
                 if ($response->isRedirect()) {
                     $url = $response->getRedirectUrl();
                     return redirect($url);
-                } elseif ($response->isSuccessful()) {
-                    // payment was successful: update database
-                    $ticket = new Tickets();
-                    $ticket->user_id = Auth::user()->id;
-                    $ticket->name = Auth::user()->name;
-                    $ticket->surname = Auth::user()->surname;
-                    $ticket->phone_number = Auth::user()->phone_number;
-                    $ticket->id_number = Auth::user()->id_number;
-                    $ticket->email = Auth::user()->email;
-                    $ticket->number_of_tickets = $this->number_of_tickets;
-                    $ticket->total = $this->total;
-                    $ticket->event_id = $this->event['id'];
-                    $ticket->status = "completed";
-                    $ticket->save();
-                    $this->event->update([
-                        'sold_tickets' => $this->event['sold_tickets'] + $this->number_of_tickets,
-                    ]);
-                } else {
-                    // payment failed: display message to customer
 
-                    $this->alert('error', $response->getMessage(), [
+
+                } else {
+
+
+                    return  $this->alert('error', $response->getMessage(), [
                         'toast' => true,
                         'position' => 'center'
                     ]);

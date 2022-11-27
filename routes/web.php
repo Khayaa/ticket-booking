@@ -14,6 +14,7 @@ use App\Http\Controllers\EventDetails;
 use App\Http\Controllers\user\UserEvents;
 use App\Http\Controllers\user\UserTickets;
 use App\Http\Controllers\ShowAllEventsController;
+use App\Http\Controllers\user\PaymentSuccessController;
 use App\Http\Controllers\User\ViewTicket;
 use App\Http\Livewire\BookEventComponent;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,7 @@ Route::get('/' , [ShowAllEventsController::class , 'show'])->name('guest');
 Route::view('about', 'about')->name('about');
 Route::get('/event-details/{id}', [EventDetails::class , 'show'])->name('event-details');
 Route::get('/allevents' , [ShowAllEventsController::class ,'show'])->name('all-events');
-Route::view( 'payment/success','users.payment-success')->name('pay-success');
+Route::get( 'payment/success/{event_id}',[ PaymentSuccessController::class,  'success'])->name('pay-success');
 Route::view( 'payment/error','users.payment-error')->name('pay-error');
 
 Route::middleware('auth')->group(function () {
