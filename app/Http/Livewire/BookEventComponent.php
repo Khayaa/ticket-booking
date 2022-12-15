@@ -8,6 +8,8 @@ use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Auth;
 use Omnipay\Omnipay;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+use Termwind\Components\Dd;
 
 class BookEventComponent extends Component
 {
@@ -65,23 +67,24 @@ class BookEventComponent extends Component
 
         if ($this->number_of_tickets == 2 and $this->event['number_of_tickets'] - $this->event['sold_tickets'] == 1) {
 
-            // $this->alert('warning', 'Opps!! , There is only one ticket left ', [
-            //     'position' => 'center'
-            // ]);
+
             $this->alert('warning', 'Opps!! , There is only one ticket left ', [
                 'toast' => true,
                 'position' => 'center'
             ]);
 
         } else {
+           if ($this->event['price'] <= 0){
 
+           }else{
             try {
-                if(is_null($this->total)){
-                    $amount = 20;
-                }else{
-                    $amount = 10;
-                }
-
+                    $price = Currency::convert()
+                    ->from('ZAR')
+                    ->to('USD')
+                    ->amount($this->total)
+                    ->get();
+                    $amount = number_format($price,2);
+                    // dd($amount);
                 $response = $this->gateway->purchase(
                     array(
                         'amount' => $amount,
@@ -116,6 +119,8 @@ class BookEventComponent extends Component
                     'position' => 'center'
                 ]);
             }
+           }
+
 
             // $this->alert('success', 'Event Successfully Booked', [
             //     'showConfirmButton' => true,
