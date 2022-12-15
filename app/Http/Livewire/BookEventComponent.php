@@ -40,15 +40,18 @@ class BookEventComponent extends Component
     public function ApplyDiscount()
     {
 
-        if ($this->number_of_tickets == 1) {
-            $this->total = $this->event['price'];
-            $this->discount = 0;
-        } else {
+        if($this->event['price'] > 0){
+            if ($this->number_of_tickets == 1) {
+                $this->total = $this->event['price'];
+                $this->discount = 0;
+            } else {
 
-            $this->price = $this->event['price'] * 2;
-            $this->discount = $this->price / 100 * 10;
-            $this->total = $this->price - $this->discount;
+                $this->price = $this->event['price'] * 2;
+                $this->discount = $this->price / 100 * 10;
+                $this->total = $this->price - $this->discount;
+            }
         }
+
     }
 
     public function confirmed()
