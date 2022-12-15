@@ -50,11 +50,14 @@
             <div class="row align-items-center">
                 <div class="col">
                     <div class="page-pretitle">
+                        @if ($event->price > 0)
                         @if ($number_of_tickets == 2)
                             <span class="status status-green">
                                 [Discount Applied ] You saved : R {{ $discount }}
                             </span>
                         @endif
+                        @endif
+
 
                     </div>
                     <h2 class="page-title">
